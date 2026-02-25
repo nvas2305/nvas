@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<title>Kỷ Yếu Graduation</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+/*
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+} */
+
+body {
+  
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.85)),
+    url("background.png") top center / contain no-repeat,
+    #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* ===== COMMON ===== */
+.fade {
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== LOADING ===== */
+.loading {
+  font-size: 32px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 15px rgba(255,0,0,0.6);
+  animation: blink 1.5s infinite;
+}
+.loading-wrap {
+  display: inline-block;
+}
+
+.loading-text {
+  font-size: 28px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 15px rgba(255,0,0,0.6);
+  margin-bottom: 14px;
+}
+
+.bar {
+  height: 6px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff3c3c, #ff9f1a);
+  animation: loadBar var(--time) linear forwards;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ===== INPUT ===== */
+.input-box {
+  text-align: center;
+}
+
+.input-box h1 {
+  font-size: 34px;
+  margin-bottom: 25px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 15px rgba(255,0,0,0.6);
+}
+
+.input-box input {
+  padding: 12px 18px;
+  width: 220px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 16px;
+}
+
+.input-box button {
+  margin-top: 18px;
+  padding: 10px 28px;
+  border-radius: 10px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.error {
+  margin-top: 12px;
+  color: #ff4d4d;
+}
+
+/* ===== MAIN (GIỮ STYLE CỦA BẠN) ===== */
+.container {
+  text-align: center;
+}
+
+.title {
+  font-size: 42px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+.image-box {
+  max-width: 420px;
+  max-height: 580px;      /* thêm dòng này */
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.15),
+    0 0 60px rgba(255, 0, 0, 0.25);
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;           /* thêm */
+  object-fit: contain;    /* QUAN TRỌNG */
+  display: block;
+}
+/*
+.image-box {
+  max-width: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.15),
+    0 0 60px rgba(255, 0, 0, 0.25);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+*/
+.image-box:hover {
+  transform: scale(1.04);
+  box-shadow:
+    0 0 35px rgba(255, 255, 255, 0.25),
+    0 0 80px rgba(255, 0, 0, 0.4);
+}
+/*
+.image-box img {
+  width: 100%;
+  display: block;
+}*/
+/* ===== CARD ===== */
+/*
+.card {
+  width: 260px;
+  height: 360px;
+  background: linear-gradient(145deg, #111, #000);
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(255,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.card span {
+  font-size: 22px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 12px rgba(255,0,0,0.6);
+}
+*/
+/* ===== FOG OPEN EFFECT ===== */
+.card {
+  width: 260px;
+  height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 0 40px rgba(255,0,0,0.35);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+/* lớp sương */
+/* ===== PURPLE FOG EFFECT ===== */
+/* ===== WHITE FOG FULLSCREEN ===== */
+/* ===== FOG IMAGE FULLSCREEN ===== */
+.fog {
+  position: fixed;
+  inset: 0;
+  background:
+    url("fog.png") center center / contain no-repeat,
+    rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 2.5s ease-in-out;
+  z-index: 9999;
+}
+/* chuyển động sương rất nhẹ */
+@keyframes fogFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-20px, -10px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+/* khi mở */
+.card.open img {
+  filter: brightness(0.6) blur(1px);
+  transform: scale(1.05);
+}
+
+/* ===== LOADING BAR ===== */
+.bar {
+  height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff3c3c, #ff9f1a);
+  animation: loadBar var(--time) linear forwards;
+}
+
+@keyframes loadBar {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+.subtitle {
+  margin-top: 26px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0,0,0,0.9);
+  transform: translateY(-10px);
+}
+@media (max-width: 480px) {
+  .title { font-size: 30px; }
+  .image-box { max-width: 90%; }
+}
+
+</style>
+</head>
+
+<body>
+<div class="fog" id="fog"></div>
+<div id="app"></div>
+
+<script>
+const app = document.getElementById("app");
+
+const images = {
+  "Phạm Thái Bình": "binh.png",
+  "Thái Bình": "binh.png",
+  "bình": "binh.png",
+  "Bình": "binh.png",
+  "thái bình": "binh.png",
+  "phạm thái bình": "binh.png",
+  "Nguyễn QUốc Sang": "sang.png",
+  "Quốc Sang": "sang.png",
+  "sang": "sang.png",
+  "Sang": "sang.png",
+  "quốc sang": "sang.png",
+  "nguyễn quốc sang": "sang.png",
+  "Phạm Trọng Thành": "thanh.png",
+  "Trọng Thành": "thanh.png",
+  "thành": "thanh.png",
+  "Thành": "thanh.png",
+  "trọng thành": "thanh.png",
+  "phạm trọng thành": "thanh.png",
+};
+function showCard() {
+  app.innerHTML = `
+    <div class="card fade" onclick="openCard(this)">
+      <img src="thiep.jpg" alt="Thiệp">
+    </div>
+  `;
+}
+// ===== STEP 0: CARD =====
+//function showCard() {
+ // app.innerHTML = `
+  //  <div class="card fade" onclick="openCard()">
+   //   <span>MỞ THIỆP</span>
+   // </div>
+  //`;
+//}
+
+//function openCard() {
+  //showLoading("Từ từ đợi load trang ...", showInput);
+//}
+function openCard(card) {
+  card.classList.add("open");
+
+  const fog = document.getElementById("fog");
+
+  // Fog hiện
+  fog.style.opacity = "1";
+
+  // Sau 4s thì sang loading (fog vẫn còn)
+  setTimeout(() => {
+    showLoading("Sương phủ kín ký ức...", showInput, 4000);
+
+    // Fog chỉ tan khi loading đã chạy
+    setTimeout(() => {
+      fog.style.opacity = "0";
+    }, 800); // tan nhẹ sau khi loading xuất hiện
+
+  }, 4000);
+}
+// ===== LOADING =====
+function showLoading(text, next, time = 3500) {
+  const width = (text.length + 4) * 10; // +4 cho đẹp, *10px mỗi ký tự
+
+  app.innerHTML = `
+    <div class="fade" style="text-align:center">
+      <div style="font-size:28px; margin-bottom:12px; text-shadow:0 0 12px red">
+        ${text}
+      </div>
+      <div class="bar" style="width:${width}px; --time:${time}ms">
+        <span></span>
+      </div>
+    </div>
+  `;
+
+  setTimeout(next, time);
+}
+// ===== INPUT =====
+function showInput() {
+  app.innerHTML = `
+    <div class="input-box fade">
+      <h1>NHẬP TÊN M ĐÊ</h1>
+      <input id="nameInput" placeholder="Tên của m..." />
+      <br>
+      <button onclick="submitName()">XÁC NHẬN</button>
+      <div class="error" id="error"></div>
+    </div>
+  `;
+}
+
+// ===== CHECK NAME =====
+function submitName() {
+  const name = document.getElementById("nameInput").value.trim();
+  if (images[name]) {
+    showLoading(`Alo ${name} à ${name} ,m chối làm sao được....`, () => showMain(images[name]));
+  } else {
+    document.getElementById("error").innerText = "Tên Dell Đúng!";
+  }
+}
+
+// ===== MAIN =====
+function showMain(img) {
+  app.innerHTML = `
+    <div class="container fade">
+      <div class="title">GRADUATION</div>
+      <div class="image-box">
+        <img src="${img}">
+      </div>
+      <div class="subtitle" id="countdown"></div>
+    </div>
+  `;
+  startCountdown();
+}
+
+// ===== COUNTDOWN =====
+function startCountdown() {
+  const target = new Date("2026-03-01T09:30:00").getTime();
+
+  setInterval(() => {
+    const now = Date.now();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById("countdown").innerText = "ĐẾN GIỜ MẸ RỒI!";
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor(diff / 3600000) % 24;
+    const m = Math.floor(diff / 60000) % 60;
+    const s = Math.floor(diff / 1000) % 60;
+
+    document.getElementById("countdown").innerText =
+      `⏳ ${d} ngày ${h} giờ ${m} phút ${s} giây`;
+  }, 1000);
+}
+
+// ===== START =====
+showCard();
+</script>
+
+</body>
+</html>
