@@ -34,7 +34,14 @@ body {
   color: #fff;
   overflow: hidden;
 }
-
+@media (max-width: 768px) {
+  body {
+    background:
+      radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.85)),
+      url("background.png") center center / contain no-repeat,
+      #000;
+  }
+}
 /* ===== COMMON ===== */
 .fade {
   animation: fadeIn 1.2s ease-in-out;
@@ -410,7 +417,6 @@ showCard();
 </body>
 
 </html>
-
 
 
 
