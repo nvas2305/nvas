@@ -353,13 +353,17 @@ function showInput() {
 }
 
 // ===== CHECK NAME =====
-if (window.NAME_TO_IMAGE[name]) {
-  showLoading(
-    `Alo ${name} à ${name} ,m chối làm sao được....`,
-    () => showMain(window.NAME_TO_IMAGE[name])
-  );
-} else {
-  document.getElementById("error").innerText = "Tên Dell Đúng!";
+function submitName() {
+  const name = document.getElementById("nameInput").value.trim();
+
+  if (window.NAME_TO_IMAGE[name]) {
+    showLoading(
+      `Alo ${name} à ${name} ,m chối làm sao được....`,
+      () => showMain(window.NAME_TO_IMAGE[name])
+    );
+  } else {
+    document.getElementById("error").innerText = "Tên Dell Đúng!";
+  }
 }
 
 // ===== MAIN =====
@@ -406,6 +410,7 @@ showCard();
 </body>
 
 </html>
+
 
 
 
